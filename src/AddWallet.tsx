@@ -132,34 +132,38 @@ const AddWallet: React.FC<AddWalletProps> = ({ isOpen, onClose }) => {
           </p>
         </div>
 
-        <div className="mt-5 flex flex-col gap-3">
-          <label htmlFor="selectId" className="text-[16px] text-[#3E4C59]">
-            Select wallet
-          </label>
-          <select
-            aria-roledescription="combobox"
-            className="h-[64px] w-full rounded-sm border border-[#CBD2D9] px-3"
-            id="selectId"
-            value={selectedWallet}
-            onChange={(e) => setSelectedWallet(e.target.value)}
-          >
-            <option value="">Select a wallet</option>
-            {wallets.map((wallet: any, index) => (
-              <option key={index} value={wallet.currency}>
-                {wallet.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mt-5 flex items-center justify-center">
-          <button
-            onClick={createWallet}
-            className="h-[54px] w-[180px] rounded-full bg-black text-white"
-            disabled={loading || !selectedWallet}
-          >
-            {loading ? "Creating wallet..." : "Create wallet"}
-          </button>
-        </div>
+        {!error && (
+          <>
+            <div className="mt-5 flex flex-col gap-3">
+              <label htmlFor="selectId" className="text-[16px] text-[#3E4C59]">
+                Select wallet
+              </label>
+              <select
+                aria-roledescription="combobox"
+                className="h-[64px] w-full rounded-sm border border-[#CBD2D9] px-3"
+                id="selectId"
+                value={selectedWallet}
+                onChange={(e) => setSelectedWallet(e.target.value)}
+              >
+                <option value="">Select a wallet</option>
+                {wallets.map((wallet: any, index) => (
+                  <option key={index} value={wallet.currency}>
+                    {wallet.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mt-5 flex items-center justify-center">
+              <button
+                onClick={createWallet}
+                className="h-[54px] w-[180px] rounded-full bg-black text-white"
+                disabled={loading || !selectedWallet}
+              >
+                {loading ? "Creating wallet..." : "Create wallet"}
+              </button>
+            </div>
+          </>
+        )}
 
         {accountError && (
           <div className="mt-8 flex h-[50px] w-[392px] items-center justify-between rounded-sm border border-[#E0B3B2] bg-[#FFF4F4] px-6">
